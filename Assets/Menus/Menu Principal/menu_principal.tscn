@@ -71,10 +71,12 @@ grow_vertical = 2
 [node name="BoutonJouer" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Jouer"
+icon_alignment = 1
 
 [node name="BoutonCrédits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Crédits"
+icon_alignment = 1
 
 [node name="StudioEventEmitter2D" type="StudioEventEmitter2D" parent="."]
 play_event = 1
