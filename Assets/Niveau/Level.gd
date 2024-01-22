@@ -1,21 +1,21 @@
 extends Node2D
 
+
+@onready var time_bar: ProgressBar = $time_bar
+@onready var score_dialog: AcceptDialog = $ScoreDialog # Temporaire
+
 const PUZZLE_BLOC_SCENE := preload("res://Assets/PuzzlesElement/PuzzleBloc/puzzle_bloc.tscn")
 const TIME_IN_SECONDS := 20
 
-@onready var time_bar: ProgressBar = $time_bar
-
 signal level_finished()
 
+var settings : LevelSettings = LevelSettings.new(1)
+
+var level_in_progress := true
 var time_left : float = TIME_IN_SECONDS
-@onready var score_dialog: AcceptDialog = $ScoreDialog # Temporaire
 
-
-var file_data  = []
 ## TODO: ajouter des mots/catégories
 ## Aussi: Ajouter d'autres types de liaisons ?
-
-
 var category_list : Array[PuzzleCategory] = [	
 	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf"]),
 	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule"]),
@@ -23,13 +23,10 @@ var category_list : Array[PuzzleCategory] = [
 	PuzzleCategory.new("Plante", 2, ["pomme", "fleur", "arbre"])
 	]
 
-
 func _ready() -> void:
 	for i in range(15):
 		var bloc = PUZZLE_BLOC_SCENE.instantiate()
 		bloc.category_list = category_list
-		## change color
-
 		get_node("Blocs").add_child(bloc)
 		bloc.connect("bloc_changed", Callable(self, "register_change").bind(i))
 		bloc.position = Vector2(50 + (i % 8) * (bloc.size.x + 50), 100 + (bloc.size.y * (i / 8)))
@@ -42,10 +39,13 @@ func _ready() -> void:
 	put_hints()
 
 func _process(delta: float) -> void:
+	if not level_in_progress:
+		return
 	time_left -= delta
 	time_bar.value = time_left
 	if time_bar.value <= 0:
 		var score := calc_score()
+		level_in_progress = false
 		score_dialog.title = "Niveau complété"
 		score_dialog.dialog_text = "Score obtenu: %d" % score
 		score_dialog.popup()
@@ -87,15 +87,11 @@ func calc_score() -> int:
 		var new_color := bloc.get_current_color()
 		if new_color == last_color:
 				current_streak_color += 100
-				print(last_color.to_html())
-				print(new_color.to_html())
-				print("------------")
 				current_streak_score_color += 1
 				
 				## TODO FAIRE LES POINTS SUR LA SUITE DE COULEUR (Ca marche)
 		last_color = new_color
 	print(current_streak_score_color)
-	
 	
 	for node_hint in get_node("Hints").get_children():
 		var hint : PuzzleHint = node_hint
