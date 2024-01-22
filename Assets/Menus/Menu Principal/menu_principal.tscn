@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsr5qyc2x6yea"]
+[gd_scene load_steps=3 format=3 uid="uid://bsr5qyc2x6yea"]
 
 [ext_resource type="Script" path="res://Assets/Menus/Menu Principal/menu_principal.gd" id="1_t55il"]
+[ext_resource type="EventAsset" uid="uid://crc067q1y58t3" path="res://addons/FMOD/editor/resources/events/{2ad4f55c-ac06-437d-af47-59957ea065c2}.tres" id="2_400na"]
 
 [node name="MenuPrincipal" type="Control"]
 layout_mode = 3
@@ -44,5 +45,10 @@ text = "Jouer"
 [node name="BoutonCrédits" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Crédits"
+
+[node name="StudioEventEmitter2D" type="StudioEventEmitter2D" parent="."]
+play_event = 1
+stop_event = 3
+event = ExtResource("2_400na")
 
 [connection signal="pressed" from="VBoxContainer/BoutonJouer" to="." method="_on_bouton_jouer_pressed"]
