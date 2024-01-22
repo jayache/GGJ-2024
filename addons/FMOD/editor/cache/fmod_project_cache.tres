@@ -34,8 +34,8 @@ bank_tree = [{
 event_tree = [{
 "children": [],
 "item_type": 1,
-"node_name": "Music",
-"path": "event:/Music",
+"node_name": "music",
+"path": "event:/music",
 "resource": ExtResource("5_ceavp")
 }]
 bus_tree = [{
