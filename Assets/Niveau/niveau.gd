@@ -7,12 +7,15 @@ const TIME_IN_SECONDS := 20
 
 signal level_finished()
 
+var time_left : float = TIME_IN_SECONDS
+
 var category_list : Array[PuzzleCategory] = [
 	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf"]),
 	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule"]),
 	PuzzleCategory.new("Ponte", 10, ["oeuf", "poule"]),
 	PuzzleCategory.new("Plante", 2, ["pomme", "fleur", "arbre"])
 ]
+
 func _ready() -> void:
 	for i in range(15):
 		var bloc = PUZZLE_BLOC_SCENE.instantiate()
@@ -29,7 +32,8 @@ func _ready() -> void:
 	time_bar.value = TIME_IN_SECONDS
 
 func _process(delta: float) -> void:
-	time_bar.value -= delta
+	time_left -= delta
+	time_bar.value = time_left
 	if time_bar.value <= 0:
 		emit_signal("level_finished")
 
