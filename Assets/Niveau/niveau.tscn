@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqfgvp0ukrkg3"]
+
+[ext_resource type="Script" path="res://Assets/Niveau/niveau.gd" id="1_rdp2k"]
+
+[node name="Niveau" type="Node2D"]
+script = ExtResource("1_rdp2k")
+
+[node name="Blocs" type="Node2D" parent="."]

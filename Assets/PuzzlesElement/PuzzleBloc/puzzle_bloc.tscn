@@ -1,0 +1,98 @@
+[gd_scene load_steps=5 format=3 uid="uid://cr2fm7yofree7"]
+
+[ext_resource type="Script" path="res://Assets/PuzzlesElement/PuzzleBloc/puzzle_bloc.gd" id="1_xb83a"]
+[ext_resource type="Texture2D" uid="uid://cyuy2d0codqhm" path="res://fleches.png" id="3_45e0e"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qnpws"]
+load_path = "res://.godot/imported/coeur.png-5d1070f41f8e4b084814e8a86f85310c.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_imt6f"]
+size = Vector2(41, 42)
+
+[node name="PuzzleBloc" type="Node2D"]
+script = ExtResource("1_xb83a")
+
+[node name="Faces" type="Node2D" parent="."]
+
+[node name="Face1" type="ColorRect" parent="Faces"]
+visible = false
+z_index = 2
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0.392157, 1, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite" type="Sprite2D" parent="Faces/Face1"]
+position = Vector2(20, 19)
+texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Face2" type="ColorRect" parent="Faces"]
+visible = false
+z_index = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fleche" type="Sprite2D" parent="Faces/Face2"]
+z_index = -5
+position = Vector2(19, 5)
+rotation = -1.5708
+texture = ExtResource("3_45e0e")
+
+[node name="Sprite" type="Sprite2D" parent="Faces/Face2"]
+position = Vector2(20, 19)
+texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Face3" type="ColorRect" parent="Faces"]
+visible = false
+z_index = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite" type="Sprite2D" parent="Faces/Face3"]
+position = Vector2(20, 19)
+texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Fleche" type="Sprite2D" parent="Faces/Face3"]
+z_index = -5
+position = Vector2(20, 38)
+rotation = 1.5708
+texture = ExtResource("3_45e0e")
+
+[node name="Face4" type="ColorRect" parent="Faces"]
+visible = false
+z_index = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite" type="Sprite2D" parent="Faces/Face4"]
+position = Vector2(19, 20)
+texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Fleche" type="Sprite2D" parent="Faces/Face4"]
+z_index = -5
+position = Vector2(2, 20)
+rotation = 3.14159
+texture = ExtResource("3_45e0e")
+
+[node name="Face5" type="ColorRect" parent="Faces"]
+z_index = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fleche" type="Sprite2D" parent="Faces/Face5"]
+z_index = -5
+position = Vector2(38, 20)
+texture = ExtResource("3_45e0e")
+
+[node name="Sprite" type="Sprite2D" parent="Faces/Face5"]
+position = Vector2(20, 20)
+texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(19, 20)
+shape = SubResource("RectangleShape2D_imt6f")
+
+[connection signal="mouse_entered" from="Hitbox" to="." method="_on_hitbox_mouse_entered"]
+[connection signal="mouse_exited" from="Hitbox" to="." method="_on_hitbox_mouse_exited"]
