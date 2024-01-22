@@ -19,7 +19,7 @@ visible = false
 z_index = 2
 offset_right = 40.0
 offset_bottom = 40.0
-color = Color(1, 0.392157, 1, 1)
+color = Color(0.619608, 0.737255, 0.411765, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face1"]
@@ -52,6 +52,7 @@ position = Vector2(20, 19)
 texture = SubResource("CompressedTexture2D_qnpws")
 
 [node name="Label" type="Label" parent="Faces/Face2"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -75,6 +76,7 @@ rotation = 1.5708
 texture = ExtResource("3_45e0e")
 
 [node name="Label" type="Label" parent="Faces/Face3"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -98,6 +100,7 @@ rotation = 3.14159
 texture = ExtResource("3_45e0e")
 
 [node name="Label" type="Label" parent="Faces/Face4"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -119,6 +122,7 @@ position = Vector2(20, 20)
 texture = SubResource("CompressedTexture2D_qnpws")
 
 [node name="Label" type="Label" parent="Faces/Face5"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
