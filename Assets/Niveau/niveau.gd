@@ -34,9 +34,7 @@ func _process(delta: float) -> void:
 		emit_signal("level_finished")
 
 func register_change(_index: int) -> void:
-	print("Register")
 	put_hints()
-	pass
 
 func put_hints() -> void:
 	print("Hints")
