@@ -3,10 +3,15 @@ extends Node2D
 class_name PuzzleBloc
 
 signal bloc_changed()
-const colors := [
-	Color.YELLOW,
+
+const  colors := [
+	Color.RED,
 	Color.BLUE,
-	Color.GREEN
+	Color.GREEN,
+	Color.AQUA,
+	Color.CHOCOLATE,
+	Color.CYAN,
+	Color.DEEP_PINK
 ]
 
 const sprites := [
@@ -24,7 +29,7 @@ enum face_order {
 	RIGHT,
 	LEFT
 }
-var faces : Array[String] = []
+var faces : Array[Array] = []
 
 var currently_showing := face_order.CENTER:
 	set = change_currently_showing
@@ -38,15 +43,26 @@ func _ready() -> void:
 		all_words += category.get_words() ## Les mots en plusieurs examplaires ont plus de chances d'apparaître
 	all_words += all_words ## On augmente (artificiellement) la quantité de mots disponibles
 	size = get_node("Hitbox/CollisionShape2D").shape.size
+	
 	for i in range(5):
 		var rnd := randi_range(0, all_words.size() - 1)
-		var current_face := all_words[rnd]
+		var current_face := [all_words[rnd]]
+
+		
+		var rng = randi_range(0, colors.size() - 1)
+		var colora = colors[rng]
+		current_face.append(colora)		
+		print(current_face)
+		
 		all_words.remove_at(rnd)
 		faces.append(current_face)
+		print(faces)
+		
 		var face : ColorRect = get_node("Faces/Face%d" % (i + 1))
-		#face.color = current_face[0]
+		var f = get_node("Faces/Face%d" % (i + 1))
+		f.modulate = colora
 		#face.get_node("Sprite").texture = load(current_face[1])
-		face.get_node("Label").text = current_face
+		face.get_node("Label").text = current_face[0]
 
 func change_currently_showing(new_orientation: face_order):
 	currently_showing = new_orientation
@@ -87,7 +103,10 @@ func change_face(face: face_order, content: String) -> void:
 	get_node("Faces/Face%d/Sprite" % face).texture = load(content)
 
 func get_current_word() -> String:
-	return faces[currently_showing]
+	return faces[currently_showing][0]
+	
+func get_current_color() -> Color:
+	return faces[currently_showing][1]
 	
 func _on_hitbox_mouse_entered() -> void:
 	hovered = true

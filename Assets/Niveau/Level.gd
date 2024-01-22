@@ -10,19 +10,26 @@ signal level_finished()
 var time_left : float = TIME_IN_SECONDS
 @onready var score_dialog: AcceptDialog = $ScoreDialog # Temporaire
 
+
+var file_data  = []
 ## TODO: ajouter des mots/catégories
 ## Aussi: Ajouter d'autres types de liaisons ?
-var category_list : Array[PuzzleCategory] = [
+
+
+var category_list : Array[PuzzleCategory] = [	
 	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf"]),
 	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule"]),
 	PuzzleCategory.new("Ponte", 10, ["oeuf", "poule"]),
 	PuzzleCategory.new("Plante", 2, ["pomme", "fleur", "arbre"])
-]
+	]
+
 
 func _ready() -> void:
 	for i in range(15):
 		var bloc = PUZZLE_BLOC_SCENE.instantiate()
 		bloc.category_list = category_list
+		## change color
+
 		get_node("Blocs").add_child(bloc)
 		bloc.connect("bloc_changed", Callable(self, "register_change").bind(i))
 		bloc.position = Vector2(50 + (i % 8) * (bloc.size.x + 50), 100 + (bloc.size.y * (i / 8)))
@@ -69,6 +76,27 @@ func calc_score() -> int:
 	var current_streak := 0
 	var current_streak_score := 0
 	var last_hint : Array[PuzzleCategory] = []
+	var current_streak_color := 0
+	var current_streak_score_color := 0
+	
+	var last_color := Color.CORAL
+	var bloc_array : Array[Node] = get_node("Blocs").get_children()
+
+	for i in range(bloc_array.size()):
+		var bloc : PuzzleBloc = bloc_array[i]
+		var new_color := bloc.get_current_color()
+		if new_color == last_color:
+				current_streak_color += 100
+				print(last_color.to_html())
+				print(new_color.to_html())
+				print("------------")
+				current_streak_score_color += 1
+				
+				## TODO FAIRE LES POINTS SUR LA SUITE DE COULEUR (Ca marche)
+		last_color = new_color
+	print(current_streak_score_color)
+	
+	
 	for node_hint in get_node("Hints").get_children():
 		var hint : PuzzleHint = node_hint
 		var new_hint = hint.get_categories()
@@ -80,5 +108,6 @@ func calc_score() -> int:
 			current_streak += 1
 			for cat in new_hint:
 				current_streak_score += cat.category_base_value * current_streak
+	
 	score += current_streak_score
 	return score
