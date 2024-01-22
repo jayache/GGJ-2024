@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cr2fm7yofree7"]
+[gd_scene load_steps=5 format=3 uid="uid://buu81tf382ryq"]
 
 [ext_resource type="Script" path="res://Assets/PuzzlesElement/PuzzleBloc/puzzle_bloc.gd" id="1_xb83a"]
 [ext_resource type="Texture2D" uid="uid://cyuy2d0codqhm" path="res://fleches.png" id="3_45e0e"]
@@ -23,8 +23,16 @@ color = Color(1, 0.392157, 1, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face1"]
+visible = false
 position = Vector2(20, 19)
 texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Label" type="Label" parent="Faces/Face1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
 
 [node name="Face2" type="ColorRect" parent="Faces"]
 visible = false
@@ -39,8 +47,15 @@ rotation = -1.5708
 texture = ExtResource("3_45e0e")
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face2"]
+visible = false
 position = Vector2(20, 19)
 texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Label" type="Label" parent="Faces/Face2"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
 
 [node name="Face3" type="ColorRect" parent="Faces"]
 visible = false
@@ -49,6 +64,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face3"]
+visible = false
 position = Vector2(20, 19)
 texture = SubResource("CompressedTexture2D_qnpws")
 
@@ -58,6 +74,12 @@ position = Vector2(20, 38)
 rotation = 1.5708
 texture = ExtResource("3_45e0e")
 
+[node name="Label" type="Label" parent="Faces/Face3"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+
 [node name="Face4" type="ColorRect" parent="Faces"]
 visible = false
 z_index = 1
@@ -65,6 +87,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face4"]
+visible = false
 position = Vector2(19, 20)
 texture = SubResource("CompressedTexture2D_qnpws")
 
@@ -73,6 +96,12 @@ z_index = -5
 position = Vector2(2, 20)
 rotation = 3.14159
 texture = ExtResource("3_45e0e")
+
+[node name="Label" type="Label" parent="Faces/Face4"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
 
 [node name="Face5" type="ColorRect" parent="Faces"]
 z_index = 1
@@ -85,8 +114,16 @@ position = Vector2(38, 20)
 texture = ExtResource("3_45e0e")
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face5"]
+visible = false
 position = Vector2(20, 20)
 texture = SubResource("CompressedTexture2D_qnpws")
+
+[node name="Label" type="Label" parent="Faces/Face5"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "toto"
 
 [node name="Hitbox" type="Area2D" parent="."]
 

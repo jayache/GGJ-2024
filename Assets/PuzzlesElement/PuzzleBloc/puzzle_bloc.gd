@@ -1,5 +1,8 @@
 extends Node2D
 
+class_name PuzzleBloc
+
+signal bloc_changed()
 const colors := [
 	Color.YELLOW,
 	Color.BLUE,
@@ -12,6 +15,8 @@ const sprites := [
 	"bird.png"
 ]
 
+var category_list : Array[PuzzleCategory] = []
+
 enum face_order {
 	CENTER,
 	DOWN,
@@ -19,22 +24,34 @@ enum face_order {
 	RIGHT,
 	LEFT
 }
-var faces : Array[Array] = []
+var faces : Array[String] = []
 
-var currently_showing := face_order.CENTER
+var currently_showing := face_order.CENTER:
+	set = change_currently_showing
 var hovered := false
 
 var size := Vector2(50, 50)
 
 func _ready() -> void:
+	var all_words : Array[String] = []
+	for category in category_list:
+		all_words += category.get_words() ## Les mots en plusieurs examplaires ont plus de chances d'apparaître
+	all_words += all_words ## On augmente (artificiellement) la quantité de mots disponibles
 	size = get_node("Hitbox/CollisionShape2D").shape.size
 	for i in range(5):
-		var current_face := [colors.pick_random(), sprites.pick_random()]
+		var rnd := randi_range(0, all_words.size() - 1)
+		var current_face := all_words[rnd]
+		all_words.remove_at(rnd)
 		faces.append(current_face)
 		var face : ColorRect = get_node("Faces/Face%d" % (i + 1))
-		face.color = current_face[0]
-		face.get_node("Sprite").texture = load(current_face[1])
+		#face.color = current_face[0]
+		#face.get_node("Sprite").texture = load(current_face[1])
+		face.get_node("Label").text = current_face
 
+func change_currently_showing(new_orientation: face_order):
+	currently_showing = new_orientation
+	emit_signal("bloc_changed")
+	
 func _process(_delta: float) -> void:
 	if hovered:
 		if currently_showing == face_order.CENTER:
@@ -58,6 +75,19 @@ func _process(_delta: float) -> void:
 	for child in get_node("Faces").get_children():
 		child.visible = false
 	get_node("Faces/Face%d" % (currently_showing + 1)).visible = true
+
+func get_all_categories_for_word(word: String) -> Array[PuzzleCategory]:
+	var ret : Array[PuzzleCategory] = []
+	for category in category_list:
+		if category.is_in_category(word):
+			ret.append(category)
+	return ret
+		
+func change_face(face: face_order, content: String) -> void:
+	get_node("Faces/Face%d/Sprite" % face).texture = load(content)
+
+func get_current_word() -> String:
+	return faces[currently_showing]
 	
 func _on_hitbox_mouse_entered() -> void:
 	hovered = true
