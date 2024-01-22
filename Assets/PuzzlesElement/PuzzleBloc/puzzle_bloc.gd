@@ -35,7 +35,7 @@ func _ready() -> void:
 		face.color = current_face[0]
 		face.get_node("Sprite").texture = load(current_face[1])
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if hovered:
 		if currently_showing == face_order.CENTER:
 			if Input.is_action_just_pressed("ui_down"):

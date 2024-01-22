@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://fj7fipjnad2g"]
+
+[ext_resource type="Script" path="res://Assets/Cutscenes/Intro/intro.gd" id="1_1187e"]
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_1187e")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 403.0
+offset_top = 121.0
+offset_right = 582.0
+offset_bottom = 144.0
+text = "INTRO DU JEU
+CINEMATIQUE OU AUTRE"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
