@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dumy0aevoqlfn"]
+
+[ext_resource type="Script" path="res://Assets/PuzzlesElement/Hints/PuzzleHint.gd" id="1_qc2xs"]
+[ext_resource type="Texture2D" uid="uid://cyuy2d0codqhm" path="res://fleches.png" id="2_h23r5"]
+
+[node name="PuzzleHint" type="Label"]
+theme_override_font_sizes/font_size = 7
+text = "Plante"
+script = ExtResource("1_qc2xs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(16, -8)
+texture = ExtResource("2_h23r5")
