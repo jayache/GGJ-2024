@@ -19,6 +19,7 @@ var time_left : float = TIME_IN_SECONDS
 
 ## TODO: ajouter des mots/catégories
 ## Aussi: Ajouter d'autres types de liaisons ?
+
 var category_list : Array[PuzzleCategory] = [	
 	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf"]),
 	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule"]),
