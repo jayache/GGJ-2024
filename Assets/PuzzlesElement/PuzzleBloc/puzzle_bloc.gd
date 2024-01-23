@@ -16,12 +16,12 @@ const  colors := [
 	Color.DEEP_PINK
 ]
 
-const good_colors := [
+const good_colors : Array[Color] = [
 	Color.GREEN,
 	Color.BLUE
 ]
 
-const bad_colors := [
+const bad_colors : Array[Color] = [
 	Color.RED,
 	Color.PURPLE
 ]
@@ -137,7 +137,7 @@ func set_swapped_with(swap: int) -> void:
 	swapped_with = swap
 	print(swapped_with)
 
-func _on_hitbox_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_hitbox_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			emit_signal("bloc_hidden_selected")

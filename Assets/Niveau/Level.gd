@@ -7,12 +7,13 @@ extends Node2D
 
 const PUZZLE_BLOC_SCENE := preload("res://Assets/PuzzlesElement/PuzzleBloc/puzzle_bloc.tscn")
 const ENEMY_SCENE := preload("res://Assets/PuzzlesElement/Enemy/enemy.tscn")
+const LINE_SCENE := preload("res://Assets/PuzzlesElement/LineArrow/line_order_arrow.tscn")
 const TIME_IN_SECONDS := 20
 
 signal level_finished()
 
-var settings := LevelSettings.new(4, true, 5, 5, true, true)
-var enemy_cooldown := 0
+var settings := LevelSettings.new(9, true, 5, 5, true, true)
+var enemy_cooldown := 0.0
 var swap_power_left := 0
 var hide_power_left := 0
 var swap_power_selected := -1
@@ -31,14 +32,35 @@ var category_list : Array[PuzzleCategory] = [
 	]
 
 func _ready() -> void:
-	for i in range(settings.difficulty * 3):
-		var bloc = PUZZLE_BLOC_SCENE.instantiate()
+	var NUMBER_OF_BLOCS := settings.difficulty * 3
+	var BLOCS_PER_LINE := NUMBER_OF_BLOCS / 3
+	var screen_size := get_viewport().get_visible_rect().size
+	var middle := screen_size / 2
+	var last_line = null
+	for i in range(NUMBER_OF_BLOCS): ## La difficulté max du jeu est 9, donc 27 blocs max
+		var bloc : PuzzleBloc = PUZZLE_BLOC_SCENE.instantiate()
+		bloc.generate_bad_color = settings.bad_colors
+		bloc.generate_good_color = settings.good_colors
+		var BLOC_PADDING := Vector2(max(bloc.size.x * 0.8, 70), max(bloc.size.y * 0.8, 70))
 		bloc.category_list = category_list
 		get_node("Blocs").add_child(bloc)
 		bloc.connect("bloc_changed", Callable(self, "register_change").bind(i))
 		bloc.connect("bloc_hidden_selected", Callable(self, "register_hide_bloc").bind(i))
 		bloc.connect("bloc_swap_selected", Callable(self, "register_swap_bloc").bind(i))
-		bloc.position = Vector2(50 + (i % 8) * (bloc.size.x + 50), 100 + (bloc.size.y * (i / 8)))
+		## Les blocs sont toujours organisés en 3 rangées
+		var start_x := middle.x - ((NUMBER_OF_BLOCS / 3) * (bloc.size.x + BLOC_PADDING.x) * 0.5)
+		var start_y := middle.y - (bloc.size.y + BLOC_PADDING.y) * 1.5
+		var position_x := start_x + (i % BLOCS_PER_LINE) * (bloc.size.x + BLOC_PADDING.x)
+		var position_y := start_y + ((bloc.size.y + BLOC_PADDING.y) * (i / BLOCS_PER_LINE))
+		bloc.position = Vector2(position_x, position_y)
+		if last_line != null:
+			last_line.set_end_point(bloc.position - Vector2(bloc.size.x, 0))
+			add_child(last_line)
+			last_line = null
+		if i % BLOCS_PER_LINE == BLOCS_PER_LINE - 1 and i != 0:
+			var line := LINE_SCENE.instantiate()
+			line.set_start_point(bloc.position + Vector2(bloc.size.x, 0))
+			last_line = line
 		var hint := PuzzleHint.new()
 		hint.position = bloc.position
 		hint.position.x += (bloc.size.x) + 5
@@ -83,6 +105,7 @@ func complete_level() -> void:
 func spawn_enemy() -> void:
 	var enemy := ENEMY_SCENE.instantiate()
 	enemy.speed = 1 + settings.difficulty / 2
+	enemy.speed *= 5
 	add_child(enemy)
 	
 func put_hints() -> void:
@@ -106,7 +129,6 @@ func calc_score() -> int:
 	var current_streak := 0
 	var current_streak_score := 0
 	var last_hint : Array[PuzzleCategory] = []
-	
 	var bloc_array : Array[Node] = get_node("Blocs").get_children()
 	
 	for node_hint in get_node("Hints").get_children():

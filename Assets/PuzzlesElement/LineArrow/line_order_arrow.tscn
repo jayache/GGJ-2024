@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bomddaodfd2hg"]
+
+[ext_resource type="Script" path="res://Assets/PuzzlesElement/LineArrow/line_order_arrow.gd" id="1_50yyi"]
+
+[sub_resource type="Curve" id="Curve_xuinp"]
+_data = [Vector2(0.47549, 0.417582), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[node name="LineOrderArrow" type="Line2D"]
+position = Vector2(45, 16)
+points = PackedVector2Array(0, 0, 72, 15, 69, 46, -158, 55, -155, 90, -110, 95)
+width_curve = SubResource("Curve_xuinp")
+joint_mode = 2
+end_cap_mode = 2
+round_precision = 20
+antialiased = true
+script = ExtResource("1_50yyi")
