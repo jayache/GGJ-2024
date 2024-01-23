@@ -1,12 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsr5qyc2x6yea"]
+[gd_scene load_steps=10 format=3 uid="uid://bsr5qyc2x6yea"]
 
 [ext_resource type="Script" path="res://Assets/Menus/Menu Principal/menu_principal.gd" id="1_t55il"]
 [ext_resource type="EventAsset" uid="uid://crc067q1y58t3" path="res://addons/FMOD/editor/resources/events/{2ad4f55c-ac06-437d-af47-59957ea065c2}.tres" id="2_400na"]
-[ext_resource type="Texture2D" uid="uid://d3nwmx7c1h6ek" path="res://Assets/Sprites/mENU/1.png" id="3_jn8nx"]
-[ext_resource type="Texture2D" uid="uid://beu3sktu50337" path="res://Assets/Sprites/mENU/2.png" id="3_q2d4j"]
-[ext_resource type="Texture2D" uid="uid://g260etbw6ahq" path="res://Assets/Sprites/mENU/3.png" id="4_2xclt"]
-[ext_resource type="Texture2D" uid="uid://qc0mcrnnx0c4" path="res://Assets/Sprites/mENU/4.png" id="5_1gfwh"]
-[ext_resource type="Texture2D" uid="uid://u08t5ar2botp" path="res://Assets/Sprites/mENU/5.png" id="6_apq3g"]
+[ext_resource type="Texture2D" uid="uid://cs75aupes8klk" path="res://Assets/Sprites/mENU/Snapshot.PNG" id="2_dcgjh"]
+[ext_resource type="Texture2D" uid="uid://bwws0clq6qaow" path="res://Assets/Sprites/mENU/Snapshot_1.PNG" id="3_mqm0l"]
+[ext_resource type="Texture2D" uid="uid://bw18fnr48juol" path="res://Assets/Sprites/mENU/2.png" id="3_q2d4j"]
+[ext_resource type="Texture2D" uid="uid://dlopjkqa8cfym" path="res://Assets/Sprites/mENU/3.png" id="4_2xclt"]
+[ext_resource type="Texture2D" uid="uid://dcc0kwy68edte" path="res://Assets/Sprites/mENU/4.png" id="5_1gfwh"]
+[ext_resource type="Texture2D" uid="uid://b6n8ttp1i2n6d" path="res://Assets/Sprites/mENU/5.png" id="6_apq3g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_svd1i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_dcgjh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mqm0l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="MenuPrincipal" type="Control"]
 layout_mode = 3
@@ -17,10 +32,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_t55il")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(590, 316)
-scale = Vector2(2.13889, 2.13889)
-texture = ExtResource("3_jn8nx")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(572, 298)
+scale = Vector2(0.662964, 0.662964)
+sprite_frames = SubResource("SpriteFrames_svd1i")
+frame_progress = 0.708876
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(584, 328)
@@ -42,6 +58,20 @@ position = Vector2(584, 328)
 scale = Vector2(2.05247, 2.05247)
 texture = ExtResource("6_apq3g")
 
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -152.0
+offset_right = 152.0
+offset_bottom = 69.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 50
+text = "NOM DU JEU"
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -49,19 +79,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.5
+offset_left = -63.0
 offset_top = -33.0
-offset_right = 31.5
+offset_right = 63.0
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 50
-text = "NOM DU JEU"
 
 [node name="BoutonJouer" type="Button" parent="VBoxContainer"]
 layout_mode = 2
