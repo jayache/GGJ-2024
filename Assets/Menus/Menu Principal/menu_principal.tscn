@@ -36,7 +36,7 @@ script = ExtResource("1_t55il")
 position = Vector2(572, 298)
 scale = Vector2(0.662964, 0.662964)
 sprite_frames = SubResource("SpriteFrames_svd1i")
-frame_progress = 0.708876
+frame_progress = 0.580768
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(584, 328)
