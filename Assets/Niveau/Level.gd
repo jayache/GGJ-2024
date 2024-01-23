@@ -11,8 +11,11 @@ const TIME_IN_SECONDS := 20
 
 signal level_finished()
 
-var settings : LevelSettings = LevelSettings.new(1)
+var settings := LevelSettings.new(4, true, 5, 5, true, true)
 var enemy_cooldown := 0
+var swap_power_left := 0
+var hide_power_left := 0
+var swap_power_selected := -1
 
 var level_in_progress := true
 var time_left : float = TIME_IN_SECONDS
@@ -33,6 +36,8 @@ func _ready() -> void:
 		bloc.category_list = category_list
 		get_node("Blocs").add_child(bloc)
 		bloc.connect("bloc_changed", Callable(self, "register_change").bind(i))
+		bloc.connect("bloc_hidden_selected", Callable(self, "register_hide_bloc").bind(i))
+		bloc.connect("bloc_swap_selected", Callable(self, "register_swap_bloc").bind(i))
 		bloc.position = Vector2(50 + (i % 8) * (bloc.size.x + 50), 100 + (bloc.size.y * (i / 8)))
 		var hint := PuzzleHint.new()
 		hint.position = bloc.position
@@ -101,20 +106,8 @@ func calc_score() -> int:
 	var current_streak := 0
 	var current_streak_score := 0
 	var last_hint : Array[PuzzleCategory] = []
-	var current_streak_color := 0
-	var current_streak_score_color := 0
 	
-	var last_color := Color.CORAL
 	var bloc_array : Array[Node] = get_node("Blocs").get_children()
-
-	for i in range(bloc_array.size()):
-		var bloc : PuzzleBloc = bloc_array[i]
-		var new_color := bloc.get_current_color()
-		if new_color == last_color:
-				current_streak_color += 100
-				current_streak_score_color += 1
-				
-		last_color = new_color
 	
 	for node_hint in get_node("Hints").get_children():
 		var hint : PuzzleHint = node_hint
@@ -127,6 +120,30 @@ func calc_score() -> int:
 			current_streak += 1
 			for cat in new_hint:
 				current_streak_score += cat.category_base_value * current_streak
-	
 	score += current_streak_score
 	return score
+
+func register_hide_bloc(index: int) -> void:
+	var blocs := get_node("Blocs").get_children()
+	var bloc : PuzzleBloc = blocs[index]
+	if bloc.hidden_by_power:
+		bloc.hidden_by_power = false
+		hide_power_left += 1
+	elif not bloc.hidden_by_power:
+		if hide_power_left > 0:
+			bloc.hidden_by_power = true
+			hide_power_left -= 1
+
+func register_swap_bloc(index: int) -> void:
+	var blocs := get_node("Blocs").get_children()
+	var bloc : PuzzleBloc = blocs[index]
+	if bloc.swapped_with != -1:
+		blocs[bloc.swapped_with].swapped_with = -1
+		bloc.swapped_with = -1
+	elif swap_power_selected == -1:
+		swap_power_selected = index
+	elif swap_power_selected != index:
+		var second_bloc : PuzzleBloc = blocs[swap_power_selected]
+		second_bloc.swapped_with = index
+		bloc.swapped_with = swap_power_selected
+		swap_power_selected = -1

@@ -135,5 +135,6 @@ position = Vector2(19, 20)
 shape = SubResource("RectangleShape2D_imt6f")
 
 [connection signal="area_shape_entered" from="Hitbox" to="." method="_on_hitbox_area_shape_entered"]
+[connection signal="input_event" from="Hitbox" to="." method="_on_hitbox_input_event"]
 [connection signal="mouse_entered" from="Hitbox" to="." method="_on_hitbox_mouse_entered"]
 [connection signal="mouse_exited" from="Hitbox" to="." method="_on_hitbox_mouse_exited"]

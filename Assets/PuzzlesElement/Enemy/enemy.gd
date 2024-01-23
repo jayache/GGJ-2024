@@ -8,11 +8,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var direction := (target - position).normalized()
-	position += direction * speed
-	if target - position < direction * speed:
+	position += direction * speed * delta
+	if target - position < direction * speed * delta:
 		target = Vector2(randi_range(10, 500), randi_range(10, 500))
 
 
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		queue_free()

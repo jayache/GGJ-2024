@@ -3,6 +3,8 @@ extends Node2D
 class_name PuzzleBloc
 
 signal bloc_changed()
+signal bloc_hidden_selected()
+signal bloc_swap_selected()
 
 const  colors := [
 	Color.RED,
@@ -27,6 +29,11 @@ const bad_colors := [
 var category_list : Array[PuzzleCategory] = []
 var generate_good_color := false
 var generate_bad_color := false
+
+var hidden_by_power := false:
+	set = set_hidden
+var swapped_with := -1:
+	set = set_swapped_with
 
 enum face_order {
 	CENTER,
@@ -120,5 +127,20 @@ func _on_hitbox_mouse_entered() -> void:
 func _on_hitbox_mouse_exited() -> void:
 	hovered = false
 
-func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+func _on_hitbox_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_index: int, _local_shape_index: int) -> void:
 	currently_showing = face_order.CENTER
+
+func set_hidden(n_hidden := true) -> void:
+	hidden_by_power = n_hidden
+	print(hidden_by_power)
+func set_swapped_with(swap: int) -> void:
+	swapped_with = swap
+	print(swapped_with)
+
+func _on_hitbox_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			emit_signal("bloc_hidden_selected")
+		elif event.button_index == MOUSE_BUTTON_LEFT:
+			emit_signal("bloc_swap_selected")
+			
