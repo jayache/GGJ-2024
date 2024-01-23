@@ -25,11 +25,13 @@ var time_left : float = TIME_IN_SECONDS
 ## Aussi: Ajouter d'autres types de liaisons ?
 
 var category_list : Array[PuzzleCategory] = [	
-	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf", "lait"]),
-	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule", "vache"]),
+	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf", "lait", "blé", "four"]),
+	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule", "vache", "chien", "mouton"]),
 	PuzzleCategory.new("Ponte", 10, ["oeuf", "poule"]),
-	PuzzleCategory.new("Plante", 2, ["pomme", "fleur", "arbre"]),
-	PuzzleCategory.new("Ferme", 2, ["vache", "lait"])
+	PuzzleCategory.new("Plante", 2, ["pomme", "fleur", "arbre", "sapin"]),
+	PuzzleCategory.new("Ferme", 10, ["vache", "lait", "tracteur","blé", "ordinateur", "mouton"]),
+	PuzzleCategory.new("Vehicule", 10, ["tracteur", "voiture", "moto", "vélo"]),
+	PuzzleCategory.new("Maison", 10, ["voiture", "chat", "chien", "ordinateur", "sapin", "four", "vélo"])
 	]
 
 func _ready() -> void:
