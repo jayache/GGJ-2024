@@ -1,9 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://fj7fipjnad2g"]
+[gd_scene load_steps=3 format=3 uid="uid://s0b76d81wsvt"]
 
 [ext_resource type="Script" path="res://Assets/Cutscenes/Intro/intro.gd" id="1_1187e"]
+[ext_resource type="Texture2D" uid="uid://dvdbw1kdgkam0" path="res://Plateau sans comédien.png" id="2_73jo2"]
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_1187e")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+scale = Vector2(23.087, 13.0167)
+color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 403.0
@@ -17,5 +28,43 @@ CINEMATIQUE OU AUTRE"
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(558, 326)
+scale = Vector2(3.96913, 4)
+texture = ExtResource("2_73jo2")
+
+[node name="LabelChroniqueur" type="Label" parent="Sprite2D"]
+offset_left = -82.3858
+offset_top = -51.75
+offset_right = -38.3858
+offset_bottom = -28.75
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 7
+text = "TOTO"
+
+[node name="LabelPresentateur" type="Label" parent="Sprite2D"]
+offset_left = 2.2675
+offset_top = -52.5
+offset_right = 46.2675
+offset_bottom = -29.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 7
+text = "TOTO"
+
+[node name="LabelComedien" type="Label" parent="Sprite2D"]
+offset_left = 51.1447
+offset_top = -45.5
+offset_right = 95.1447
+offset_bottom = -22.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 7
+text = "TOTO"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

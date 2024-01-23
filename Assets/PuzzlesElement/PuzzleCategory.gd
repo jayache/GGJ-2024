@@ -9,8 +9,6 @@ var category_base_value := 1
 ## Liste de mots
 var word_list : Array[String] = []
 
-var color := "#ffffff"
-
 func _init(n_category_name: String, n_category_base_value: int, n_word_list: Array[String]) -> void:
 	category_name = n_category_name
 	category_base_value = n_category_base_value
@@ -23,5 +21,3 @@ func is_in_category(word: String) -> bool:
 func get_words() -> Array[String]:
 	return word_list
 	
-func get_color() -> String:
-	return color
