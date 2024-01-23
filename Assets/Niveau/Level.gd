@@ -7,7 +7,7 @@ extends Node2D
 const PUZZLE_BLOC_SCENE := preload("res://Assets/PuzzlesElement/PuzzleBloc/puzzle_bloc.tscn")
 const ENEMY_SCENE := preload("res://Assets/PuzzlesElement/Enemy/enemy.tscn")
 const LINE_SCENE := preload("res://Assets/PuzzlesElement/LineArrow/line_order_arrow.tscn")
-const TIME_IN_SECONDS := 3
+const TIME_IN_SECONDS := 20
 
 signal level_finished()
 signal score_animation_finished(score: int)

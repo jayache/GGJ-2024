@@ -4,6 +4,7 @@ extends Node2D
 @onready var label_presentateur: Label = $Sprite2D/LabelPresentateur
 @onready var label_comedien: Label = $Sprite2D/LabelComedien
 
+
 var texte := [
 	"Blablabla",
 	"Blablabla",
@@ -21,15 +22,19 @@ var texte := [
 
 func say_line(index: int, text: String) -> void:
 	var label : Label
+	
 	if index == 0:
 		label = label_chroniqueur
 	if index == 1:
 		label = label_presentateur
 	if index == 2:
 		label = label_comedien
-	label.text = text
-	await get_tree().create_timer(1).timeout
+	label.visible = true
+	label.set_dialogue(text)
+	await label.dialogue_finished
+	await get_tree().create_timer(0.75).timeout
 	label.text = ""
+	label.visible = false
 	
 
 func _on_timer_timeout() -> void:
@@ -39,7 +44,14 @@ func _on_timer_timeout() -> void:
 	await say_line(1, texte[3])
 	await say_line(1, texte[4])
 	await say_line(1, texte[5])
+	var tween := create_tween()
+	tween.tween_property($Overlay, "color", Color(0, 0, 0, 1), 0.7)
+	await get_tree().create_timer(1.5).timeout
 	$Sprite2D.texture = load("res://plateau_avec_comedien.png")
+	tween = create_tween()
+	tween.tween_property($Overlay, "color", Color(0, 0, 0, 0), 0.7)
+	await get_tree().create_timer(0.75).timeout
+	
 	await say_line(1, texte[6])
 	await say_line(2, texte[7])
 	await say_line(0, texte[8])
