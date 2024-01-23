@@ -2,3 +2,4 @@
 .godot/
 *.tmp
 *.import
+addons/FMOD/native/lib/win64/release/~libfmod.windows.template_release.dll
