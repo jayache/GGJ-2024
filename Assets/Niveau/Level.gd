@@ -8,9 +8,10 @@ extends Node2D
 const PUZZLE_BLOC_SCENE := preload("res://Assets/PuzzlesElement/PuzzleBloc/puzzle_bloc.tscn")
 const ENEMY_SCENE := preload("res://Assets/PuzzlesElement/Enemy/enemy.tscn")
 const LINE_SCENE := preload("res://Assets/PuzzlesElement/LineArrow/line_order_arrow.tscn")
-const TIME_IN_SECONDS := 20
+const TIME_IN_SECONDS := 3
 
 signal level_finished()
+signal score_animation_finished()
 
 var settings := LevelSettings.new(9, true, 5, 5, true, true)
 var enemy_cooldown := 0.0
@@ -95,6 +96,8 @@ func register_change(_index: int) -> void:
 
 func complete_level() -> void:
 	level_in_progress = false
+	play_score_animation()
+	await self.score_animation_finished
 	var score := calc_score()
 	score_dialog.title = "Niveau complété"
 	score_dialog.dialog_text = "Score obtenu: %d" % score
@@ -144,6 +147,90 @@ func calc_score() -> int:
 				current_streak_score += cat.category_base_value * current_streak
 	score += current_streak_score
 	return score
+	
+func get_all_categories_for_word(word: String) -> Array[PuzzleCategory]:
+	var ret : Array[PuzzleCategory] = []
+	for category in category_list:
+		if category.is_in_category(word):
+			ret.append(category)
+	return ret
+	
+func word_share_category(a: String, b: String) -> bool:
+	var new_categories := get_all_categories_for_word(a)
+	for category in get_all_categories_for_word(b):
+		if new_categories.has(category):
+			return true
+	return false
+
+func word_share_category_score(a: String, b: String) -> int:
+	var score := 0
+	var new_categories := get_all_categories_for_word(a)
+	for category in get_all_categories_for_word(b):
+		if new_categories.has(category):
+			score += category.category_base_value
+	return score
+	
+
+func word_share_category_words(a: String, b: String) -> Array[PuzzleCategory]:
+	var ret : Array[PuzzleCategory] = []
+	var new_categories := get_all_categories_for_word(a)
+	for category in get_all_categories_for_word(b):
+		if new_categories.has(category):
+			ret.append(category)
+	return ret
+	
+func play_score_animation() -> void:
+	var blocs := get_node("Blocs").get_children()
+	var previous_categories : Array[PuzzleCategory]= []
+	var total_score := 0
+	var streak := 0
+	var streak_score := 0
+	var wait_speed := 0.5
+	for i in range(blocs.size() - 1):
+		var first_bloc : PuzzleBloc = blocs[i]
+		if first_bloc.hidden_by_power:
+			continue
+		var second_bloc : PuzzleBloc = blocs[i + 1]
+		if second_bloc.hidden_by_power:
+			var offset = 1
+			while second_bloc.hidden_by_power:
+				offset += 1
+				second_bloc = blocs[i + offset]
+		var a := first_bloc.get_current_word()
+		var b := second_bloc.get_current_word()
+		var a_color = first_bloc.get_current_color()
+		var b_color = second_bloc.get_current_color()
+		if word_share_category(a, b) or [a_color, b_color].has(Color.GREEN):
+			var cats := word_share_category_words(a, b)
+			var categories_word := ""
+			for cat in cats:
+				categories_word += cat.category_name + "\n"
+			var sc := word_share_category_score(a, b)
+			if a_color == Color.BLUE:
+				sc *= 2
+			if b_color == Color.BLUE:
+				sc *= 2
+			if a_color == Color.RED:
+				sc *= 0
+			if b_color == Color.RED:
+				sc *= 0
+			if b_color == Color.PURPLE:
+				sc -= 2
+			if a_color == Color.PURPLE:
+				sc -= 2		
+			streak += 1
+			streak_score += sc * streak
+			first_bloc.emit_success(categories_word, sc * streak)
+			second_bloc.emit_success(categories_word, sc * streak)
+			await get_tree().create_timer(wait_speed).timeout
+		else:
+			total_score += streak_score
+			streak = 0
+			streak_score = 0
+			first_bloc.emit_failure()
+			second_bloc.emit_failure()
+			await get_tree().create_timer(wait_speed).timeout
+	emit_signal("score_animation_finished")
 
 func register_hide_bloc(index: int) -> void:
 	var blocs := get_node("Blocs").get_children()

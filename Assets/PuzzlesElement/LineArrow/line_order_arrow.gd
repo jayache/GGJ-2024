@@ -3,7 +3,6 @@ extends Line2D
 var direction_right := true
 
 func _ready():
-	return
 	smooth_curve()
 	
 func set_start_point(start: Vector2) -> void:

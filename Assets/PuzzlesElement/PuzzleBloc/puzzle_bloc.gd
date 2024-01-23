@@ -5,7 +5,7 @@ class_name PuzzleBloc
 signal bloc_changed()
 signal bloc_hidden_selected()
 signal bloc_swap_selected()
-
+signal finished_emitting()
 const  colors := [
 	Color.RED,
 	Color.BLUE,
@@ -25,6 +25,10 @@ const bad_colors : Array[Color] = [
 	Color.RED,
 	Color.PURPLE
 ]
+
+@onready var emitter_success: CPUParticles2D = $EmitterSuccess
+@onready var emitter_failure: CPUParticles2D = $EmitterFailure
+const LABEL_SCORE := preload("res://Assets/PuzzlesElement/LabelScoreAnim/label_score_anim.tscn")
 
 var category_list : Array[PuzzleCategory] = []
 var generate_good_color := false
@@ -117,6 +121,18 @@ func change_face(face: face_order, content: String) -> void:
 
 func get_current_word() -> String:
 	return faces[currently_showing][0]
+
+func emit_success(word: String, score: int) -> void:
+	var label := LABEL_SCORE.instantiate()
+	label.word = "%s:%d" % [word, score]
+	add_child(label)
+	emitter_success.emitting = true
+	
+	
+
+func emit_failure() -> void:
+	$EmitterFailure.emitting = true
+	
 	
 func get_current_color() -> Color:
 	return faces[currently_showing][1]
@@ -132,10 +148,9 @@ func _on_hitbox_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_in
 
 func set_hidden(n_hidden := true) -> void:
 	hidden_by_power = n_hidden
-	print(hidden_by_power)
+	
 func set_swapped_with(swap: int) -> void:
 	swapped_with = swap
-	print(swapped_with)
 
 func _on_hitbox_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
@@ -143,4 +158,6 @@ func _on_hitbox_input_event(_viewport: Node, event: InputEvent, _shape_idx: int)
 			emit_signal("bloc_hidden_selected")
 		elif event.button_index == MOUSE_BUTTON_LEFT:
 			emit_signal("bloc_swap_selected")
-			
+
+func _on_emitter_finished() -> void:
+	emit_signal("finished_emitting")
