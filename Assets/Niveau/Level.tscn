@@ -16,3 +16,10 @@ step = 0.001
 
 [node name="ScoreDialog" type="AcceptDialog" parent="."]
 initial_position = 2
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 27.0
+offset_right = 159.0
+offset_bottom = 76.0
+text = "Score: "

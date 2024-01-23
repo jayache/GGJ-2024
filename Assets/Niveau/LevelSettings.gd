@@ -7,8 +7,8 @@ var no_timer := false ## Si vrai, le niveau n'a pas de timer et se termine aprè
 var enemies := false ## Si vrai, des ennemis apparaissent à l'écran pour perturber les blocs déjà mis
 var swap_power_amount := 0 ## Si >0, il est possible d'échanger des blocs avec un pouvoir 
 var invis_power_amount := 0 ## Si >0, il est possible de rendre invisible un bloc avec un pouvoir
-var good_colors := false
-var bad_colors := false
+var good_colors := false ## Si vrai, des couleurs bénéfiques pour le score peuvent apparaître
+var bad_colors := false ## Si vrai, des couleurs nuisible pour le score peuvent apparaître
 
 func _init(n_difficulty: int, n_enemies := false, n_swap_power_amount := 0, n_invis_power_amount := 0, n_good_colors := false, n_bad_colors := false, n_no_timer := false) -> void:
 	difficulty = n_difficulty

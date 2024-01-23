@@ -3,13 +3,16 @@ extends Node2D
 
 @onready var time_bar: ProgressBar = $time_bar
 @onready var score_dialog: AcceptDialog = $ScoreDialog # Temporaire
+@onready var score_label: Label = $ScoreLabel
 
 const PUZZLE_BLOC_SCENE := preload("res://Assets/PuzzlesElement/PuzzleBloc/puzzle_bloc.tscn")
+const ENEMY_SCENE := preload("res://Assets/PuzzlesElement/Enemy/enemy.tscn")
 const TIME_IN_SECONDS := 20
 
 signal level_finished()
 
 var settings : LevelSettings = LevelSettings.new(1)
+var enemy_cooldown := 0
 
 var level_in_progress := true
 var time_left : float = TIME_IN_SECONDS
@@ -24,7 +27,7 @@ var category_list : Array[PuzzleCategory] = [
 	]
 
 func _ready() -> void:
-	for i in range(15):
+	for i in range(settings.difficulty * 3):
 		var bloc = PUZZLE_BLOC_SCENE.instantiate()
 		bloc.category_list = category_list
 		get_node("Blocs").add_child(bloc)
@@ -36,25 +39,46 @@ func _ready() -> void:
 		get_node("Hints").add_child(hint)
 	time_bar.max_value = TIME_IN_SECONDS
 	time_bar.value = TIME_IN_SECONDS
+	if settings.no_timer:
+		time_bar.visible = false
 	put_hints()
 
 func _process(delta: float) -> void:
 	if not level_in_progress:
 		return
-	time_left -= delta
-	time_bar.value = time_left
-	if time_bar.value <= 0:
-		var score := calc_score()
-		level_in_progress = false
-		score_dialog.title = "Niveau complété"
-		score_dialog.dialog_text = "Score obtenu: %d" % score
-		score_dialog.popup()
-		await score_dialog.confirmed
-		emit_signal("level_finished", score)
-
+	if settings.enemies:
+		if enemy_cooldown <= 0:
+			spawn_enemy()
+			enemy_cooldown = 10 / settings.difficulty
+		else:
+			enemy_cooldown -= delta
+	if not settings.no_timer:
+		time_left -= delta
+		time_bar.value = time_left
+		if time_bar.value <= 0:
+			complete_level()
+	if settings.no_timer and calc_score() > 10:
+		complete_level()
+	
 func register_change(_index: int) -> void:
 	put_hints()
+	var score := calc_score()
+	score_label.text = "Score: %d" % score
 
+func complete_level() -> void:
+	level_in_progress = false
+	var score := calc_score()
+	score_dialog.title = "Niveau complété"
+	score_dialog.dialog_text = "Score obtenu: %d" % score
+	score_dialog.popup()
+	await score_dialog.confirmed
+	emit_signal("level_finished", score)
+	
+func spawn_enemy() -> void:
+	var enemy := ENEMY_SCENE.instantiate()
+	enemy.speed = 1 + settings.difficulty / 2
+	add_child(enemy)
+	
 func put_hints() -> void:
 	var last_categories : Array[PuzzleCategory] = []
 	var bloc_array : Array[Node] = get_node("Blocs").get_children()
@@ -89,9 +113,7 @@ func calc_score() -> int:
 				current_streak_color += 100
 				current_streak_score_color += 1
 				
-				## TODO FAIRE LES POINTS SUR LA SUITE DE COULEUR (Ca marche)
 		last_color = new_color
-	print(current_streak_score_color)
 	
 	for node_hint in get_node("Hints").get_children():
 		var hint : PuzzleHint = node_hint

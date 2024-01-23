@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7mow677hftwo"]
+
+[ext_resource type="Texture2D" uid="uid://0rhsk0bqjtuc" path="res://coeur.png" id="1_sc0nn"]
+[ext_resource type="Script" path="res://Assets/PuzzlesElement/Enemy/enemy.gd" id="2_m8pag"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_petsv"]
+radius = 13.0645
+
+[node name="Enemy" type="Sprite2D"]
+position = Vector2(0.5, 0)
+scale = Vector2(1.03333, 1)
+texture = ExtResource("1_sc0nn")
+script = ExtResource("2_m8pag")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_petsv")
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

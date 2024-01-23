@@ -14,13 +14,19 @@ const  colors := [
 	Color.DEEP_PINK
 ]
 
-const sprites := [
-	"coeur.png",
-	"bread.png",
-	"bird.png"
+const good_colors := [
+	Color.GREEN,
+	Color.BLUE
+]
+
+const bad_colors := [
+	Color.RED,
+	Color.PURPLE
 ]
 
 var category_list : Array[PuzzleCategory] = []
+var generate_good_color := false
+var generate_bad_color := false
 
 enum face_order {
 	CENTER,
@@ -41,28 +47,28 @@ func _ready() -> void:
 	var all_words : Array[String] = []
 	for category in category_list:
 		all_words += category.get_words() ## Les mots en plusieurs examplaires ont plus de chances d'apparaître
-	all_words += all_words ## On augmente (artificiellement) la quantité de mots disponibles
 	size = get_node("Hitbox/CollisionShape2D").shape.size
-	
+	var potential_colors : Array[Color] = []
+	if generate_good_color:
+		potential_colors += good_colors
+	if generate_bad_color:
+		potential_colors += bad_colors
+	for i in range(10 - potential_colors.size()):
+		potential_colors.append(Color.WHITE)
 	for i in range(5):
-		var rnd := randi_range(0, all_words.size() - 1)
-		var current_face := [all_words[rnd]]
-
-		
-		var rng = randi_range(0, colors.size() - 1)
-		var colora = colors[rng]
-		current_face.append(colora)		
-		print(current_face)
-		
-		all_words.remove_at(rnd)
-		faces.append(current_face)
-		print(faces)
-		
 		var face : ColorRect = get_node("Faces/Face%d" % (i + 1))
-		var f = get_node("Faces/Face%d" % (i + 1))
-		f.modulate = colora
+		var rnd := randi_range(0, all_words.size() - 1)
+		var current_face := all_words[rnd]
+		
+		var colora = Color.WHITE
+		if potential_colors.size() > 0:
+			colora = potential_colors.pick_random()
+		face.color = colora
+			
+		all_words.remove_at(rnd)
+		faces.append([current_face, colora])
 		#face.get_node("Sprite").texture = load(current_face[1])
-		face.get_node("Label").text = current_face[0]
+		face.get_node("Label").text = current_face
 
 func change_currently_showing(new_orientation: face_order):
 	currently_showing = new_orientation
@@ -113,3 +119,6 @@ func _on_hitbox_mouse_entered() -> void:
 
 func _on_hitbox_mouse_exited() -> void:
 	hovered = false
+
+func _on_hitbox_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	currently_showing = face_order.CENTER
