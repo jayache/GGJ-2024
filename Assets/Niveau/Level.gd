@@ -1,7 +1,6 @@
 extends Node2D
 
-
-@onready var time_bar: ProgressBar = $time_bar
+@onready var time_bar = $Node2D/time_bar
 @onready var score_dialog: AcceptDialog = $ScoreDialog # Temporaire
 @onready var score_label: Label = $ScoreLabel
 
@@ -26,10 +25,11 @@ var time_left : float = TIME_IN_SECONDS
 ## Aussi: Ajouter d'autres types de liaisons ?
 
 var category_list : Array[PuzzleCategory] = [	
-	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf"]),
-	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule"]),
+	PuzzleCategory.new("Nourriture", 1, ["pomme", "pain", "oeuf", "lait"]),
+	PuzzleCategory.new("Animal", 1, ["oiseau", "chat", "poule", "vache"]),
 	PuzzleCategory.new("Ponte", 10, ["oeuf", "poule"]),
-	PuzzleCategory.new("Plante", 2, ["pomme", "fleur", "arbre"])
+	PuzzleCategory.new("Plante", 2, ["pomme", "fleur", "arbre"]),
+	PuzzleCategory.new("Ferme", 2, ["vache", "lait"])
 	]
 
 func _ready() -> void:
@@ -84,6 +84,8 @@ func _process(delta: float) -> void:
 	if not settings.no_timer:
 		time_left -= delta
 		time_bar.value = time_left
+		$Node2D/time_bar/Label.text = "%d" % time_left
+		
 		if time_bar.value <= 0:
 			complete_level()
 	if settings.no_timer and calc_score() > 10:

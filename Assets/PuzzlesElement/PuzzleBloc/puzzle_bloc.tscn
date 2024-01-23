@@ -22,11 +22,11 @@ offset_bottom = 40.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face1"]
-visible = false
 position = Vector2(20, 19)
 texture = SubResource("CompressedTexture2D_qnpws")
 
 [node name="Label" type="Label" parent="Faces/Face1"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -50,6 +50,7 @@ position = Vector2(20, 19)
 texture = SubResource("CompressedTexture2D_qnpws")
 
 [node name="Label" type="Label" parent="Faces/Face2"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -63,7 +64,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face3"]
-visible = false
 position = Vector2(20, 19)
 texture = SubResource("CompressedTexture2D_qnpws")
 
@@ -74,6 +74,7 @@ rotation = 1.5708
 texture = ExtResource("3_45e0e")
 
 [node name="Label" type="Label" parent="Faces/Face3"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -87,7 +88,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face4"]
-visible = false
 position = Vector2(19, 20)
 texture = SubResource("CompressedTexture2D_qnpws")
 
@@ -98,6 +98,7 @@ rotation = 3.14159
 texture = ExtResource("3_45e0e")
 
 [node name="Label" type="Label" parent="Faces/Face4"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
@@ -115,11 +116,11 @@ position = Vector2(38, 20)
 texture = ExtResource("3_45e0e")
 
 [node name="Sprite" type="Sprite2D" parent="Faces/Face5"]
-visible = false
 position = Vector2(20, 20)
 texture = SubResource("CompressedTexture2D_qnpws")
 
 [node name="Label" type="Label" parent="Faces/Face5"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0

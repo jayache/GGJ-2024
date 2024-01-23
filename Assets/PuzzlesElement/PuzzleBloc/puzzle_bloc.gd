@@ -6,6 +6,9 @@ signal bloc_changed()
 signal bloc_hidden_selected()
 signal bloc_swap_selected()
 signal finished_emitting()
+
+var plus = preload("res://coeur.png")
+
 const  colors := [
 	Color.RED,
 	Color.BLUE,
@@ -79,7 +82,10 @@ func _ready() -> void:
 		all_words.remove_at(rnd)
 		faces.append([current_face, colora])
 		#face.get_node("Sprite").texture = load(current_face[1])
-		face.get_node("Label").text = current_face
+		var format_string = "res://Assets/Sprites/Word/%s.png"
+		var actual_string = format_string % current_face
+		print(actual_string)
+		face.get_node("Sprite").texture = load(actual_string)
 
 func change_currently_showing(new_orientation: face_order):
 	currently_showing = new_orientation
@@ -117,7 +123,7 @@ func get_all_categories_for_word(word: String) -> Array[PuzzleCategory]:
 	return ret
 		
 func change_face(face: face_order, content: String) -> void:
-	get_node("Faces/Face%d/Sprite" % face).texture = load(content)
+	get_node("Faces/Face%d/Sprite" % face).texture = load("res://Assets/Sprites/Word/%s.png" % content)
 
 func get_current_word() -> String:
 	return faces[currently_showing][0]
