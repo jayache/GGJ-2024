@@ -20,12 +20,31 @@ var texte := [
 ]
 
 func say_line(index: int, text: String) -> void:
-	label_chroniqueur.text = text
+	var label : Label
+	if index == 0:
+		label = label_chroniqueur
+	if index == 1:
+		label = label_presentateur
+	if index == 2:
+		label = label_comedien
+	label.text = text
 	await get_tree().create_timer(1).timeout
-	label_chroniqueur.text = ""
+	label.text = ""
 	
 
 func _on_timer_timeout() -> void:
-	await say_line(1, texte[0])
+	await say_line(0, texte[0])
+	await say_line(1, texte[1])
+	await say_line(0, texte[2])
+	await say_line(1, texte[3])
+	await say_line(1, texte[4])
+	await say_line(1, texte[5])
+	$Sprite2D.texture = load("res://plateau_avec_comedien.png")
+	await say_line(1, texte[6])
+	await say_line(2, texte[7])
+	await say_line(0, texte[8])
+	await say_line(2, texte[9])
+	await say_line(0, texte[10])
+	await say_line(2, texte[11])
 	get_tree().root.get_node("Intro").queue_free()
 	get_tree().root.add_child(LevelManager.next_level())
