@@ -37,7 +37,8 @@ func _ready() -> void:
 	var BLOCS_PER_LINE := NUMBER_OF_BLOCS / 3
 	var screen_size := get_viewport().get_visible_rect().size
 	var sprite : Sprite2D = $Node2D/Sprite2D
-	
+	hide_power_left = settings.invis_power_amount
+	swap_power_left = settings.swap_power_amount
 	$Node2D.position = Vector2(screen_size.x - sprite.texture.get_size().x, sprite.texture.get_size().y)
 	var middle := screen_size / 2
 	var last_line = null
@@ -75,6 +76,10 @@ func _ready() -> void:
 		$Node2D.visible = false
 	put_hints()
 
+func update_gui() -> void:
+	$GUI/Pouvoirs/Ghost.text = "DISPARITION: %d" % hide_power_left
+	$GUI/Pouvoirs/Swap.text = "ECHANGE: %d" % swap_power_left	
+
 func _process(delta: float) -> void:
 	if not level_in_progress:
 		return
@@ -91,6 +96,7 @@ func _process(delta: float) -> void:
 		
 		if time_bar.value <= 0:
 			complete_level()
+	update_gui()
 	
 func register_change(_index: int) -> void:
 	put_hints()
@@ -101,8 +107,6 @@ func complete_level() -> void:
 		bloc.set_disabled(true)
 	play_score_animation()
 	var score : int = await self.score_animation_finished
-	print("coucou")
-	print(score)
 	score_dialog.title = "Niveau complété"
 	score_dialog.dialog_text = "Score obtenu: %d" % score
 	score_dialog.popup()
@@ -249,10 +253,24 @@ func register_swap_bloc(index: int) -> void:
 	if bloc.swapped_with != -1:
 		blocs[bloc.swapped_with].swapped_with = -1
 		bloc.swapped_with = -1
+		blocs[bloc.swapped_with].line = null
+		bloc.line.queue_free()
+		swap_power_left += 1
+		bloc.line = null
+	elif swap_power_left <= 0:
+		return
 	elif swap_power_selected == -1:
 		swap_power_selected = index
 	elif swap_power_selected != index:
+		var line := Line2D.new()
+		line.width = 1
+		line.modulate = Color.PERU
 		var second_bloc : PuzzleBloc = blocs[swap_power_selected]
+		add_child(line)
+		line.points = [bloc.position + bloc.size / 2, second_bloc.position + bloc.size / 2]
+		bloc.line = line
+		second_bloc.line = line
 		second_bloc.swapped_with = index
 		bloc.swapped_with = swap_power_selected
 		swap_power_selected = -1
+		swap_power_left -= 1

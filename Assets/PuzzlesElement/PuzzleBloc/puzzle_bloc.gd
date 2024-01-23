@@ -37,6 +37,9 @@ var category_list : Array[PuzzleCategory] = []
 var generate_good_color := false
 var generate_bad_color := false
 
+## Utilisé pour mémoriser quelle ligne il faut supprimer quand la liaison est rompue
+var line : Line2D = null 
+
 var disabled := false
 var hidden_by_power := false:
 	set = set_hidden
@@ -160,7 +163,7 @@ func _on_hitbox_area_shape_entered(_area_rid: RID, _area: Area2D, _area_shape_in
 
 func set_hidden(n_hidden := true) -> void:
 	hidden_by_power = n_hidden
-	
+	$GhostIcon.visible = hidden_by_power
 func set_swapped_with(swap: int) -> void:
 	swapped_with = swap
 
