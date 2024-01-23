@@ -37,6 +37,7 @@ var category_list : Array[PuzzleCategory] = []
 var generate_good_color := false
 var generate_bad_color := false
 
+var disabled := false
 var hidden_by_power := false:
 	set = set_hidden
 var swapped_with := -1:
@@ -90,8 +91,13 @@ func _ready() -> void:
 func change_currently_showing(new_orientation: face_order):
 	currently_showing = new_orientation
 	emit_signal("bloc_changed")
+
+func set_disabled(ndisabled: bool) -> void:
+	disabled = ndisabled
 	
 func _process(_delta: float) -> void:
+	if disabled:
+		return
 	if hovered:
 		if currently_showing == face_order.CENTER:
 			if Input.is_action_just_pressed("ui_down"):

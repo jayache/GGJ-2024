@@ -12,7 +12,7 @@ func next_level() -> Node:
 	var level := LEVEL.instantiate()
 	var settings : LevelSettings = null
 	match(current_level):
-		1: settings = LevelSettings.new(1, false, 0, 0, false, false, true)
+		1: settings = LevelSettings.new(1, false, 0, 0, false, false, false)
 		2: settings = LevelSettings.new(2)
 		3: settings = LevelSettings.new(3)
 		4: settings = LevelSettings.new(4)

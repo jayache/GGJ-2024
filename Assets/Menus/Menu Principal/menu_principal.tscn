@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Assets/Menus/Menu Principal/menu_principal.gd" id="1_t55il"]
 [ext_resource type="EventAsset" uid="uid://crc067q1y58t3" path="res://addons/FMOD/editor/resources/events/{2ad4f55c-ac06-437d-af47-59957ea065c2}.tres" id="2_400na"]
-[ext_resource type="Texture2D" uid="uid://djittww7wgtkg" path="res://Assets/Sprites/mENU/1.png" id="3_jn8nx"]
-[ext_resource type="Texture2D" uid="uid://bw18fnr48juol" path="res://Assets/Sprites/mENU/2.png" id="3_q2d4j"]
-[ext_resource type="Texture2D" uid="uid://dlopjkqa8cfym" path="res://Assets/Sprites/mENU/3.png" id="4_2xclt"]
-[ext_resource type="Texture2D" uid="uid://dcc0kwy68edte" path="res://Assets/Sprites/mENU/4.png" id="5_1gfwh"]
-[ext_resource type="Texture2D" uid="uid://b6n8ttp1i2n6d" path="res://Assets/Sprites/mENU/5.png" id="6_apq3g"]
+[ext_resource type="Texture2D" uid="uid://d3nwmx7c1h6ek" path="res://Assets/Sprites/mENU/1.png" id="3_jn8nx"]
+[ext_resource type="Texture2D" uid="uid://beu3sktu50337" path="res://Assets/Sprites/mENU/2.png" id="3_q2d4j"]
+[ext_resource type="Texture2D" uid="uid://g260etbw6ahq" path="res://Assets/Sprites/mENU/3.png" id="4_2xclt"]
+[ext_resource type="Texture2D" uid="uid://qc0mcrnnx0c4" path="res://Assets/Sprites/mENU/4.png" id="5_1gfwh"]
+[ext_resource type="Texture2D" uid="uid://u08t5ar2botp" path="res://Assets/Sprites/mENU/5.png" id="6_apq3g"]
 
 [node name="MenuPrincipal" type="Control"]
 layout_mode = 3
@@ -42,18 +42,6 @@ position = Vector2(584, 328)
 scale = Vector2(2.05247, 2.05247)
 texture = ExtResource("6_apq3g")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -49.0
-offset_right = 49.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 50
-text = "NOM DU JEU"
-
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -67,6 +55,13 @@ offset_right = 31.5
 offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 50
+text = "NOM DU JEU"
 
 [node name="BoutonJouer" type="Button" parent="VBoxContainer"]
 layout_mode = 2
