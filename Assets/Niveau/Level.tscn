@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqfgvp0ukrkg3"]
+[gd_scene load_steps=4 format=3 uid="uid://cqfgvp0ukrkg3"]
 
 [ext_resource type="Script" path="res://Assets/Niveau/Level.gd" id="1_irtxt"]
+[ext_resource type="Texture2D" uid="uid://vca3k0ui0euo" path="res://Assets/Sprites/Timebar/back.png" id="2_jng7y"]
+[ext_resource type="Texture2D" uid="uid://yuolpvjdboti" path="res://Assets/Sprites/Timebar/hover.png" id="3_bi6x8"]
 
 [node name="Niveau" type="Node2D"]
 script = ExtResource("1_irtxt")
@@ -8,11 +10,6 @@ script = ExtResource("1_irtxt")
 [node name="Hints" type="Node2D" parent="."]
 
 [node name="Blocs" type="Node2D" parent="."]
-
-[node name="time_bar" type="ProgressBar" parent="."]
-offset_right = 1150.0
-offset_bottom = 27.0
-step = 0.001
 
 [node name="ScoreDialog" type="AcceptDialog" parent="."]
 initial_position = 2
@@ -23,3 +20,50 @@ offset_top = 27.0
 offset_right = 159.0
 offset_bottom = 76.0
 text = "Score: "
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(1089, 65)
+scale = Vector2(0.8, 0.8)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+scale = Vector2(1.3525, 1.3525)
+texture = ExtResource("2_jng7y")
+
+[node name="time_bar" type="TextureProgressBar" parent="Node2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.0
+offset_top = -35.0
+offset_right = 44.0
+offset_bottom = 58.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.001
+value = 100.0
+fill_mode = 5
+nine_patch_stretch = true
+texture_progress = ExtResource("3_bi6x8")
+tint_progress = Color(0.415686, 0, 1, 1)
+radial_initial_angle = 360.0
+
+[node name="Label" type="Label" parent="Node2D/time_bar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.2501
+offset_top = -26.5
+offset_right = 16.7499
+offset_bottom = 9.49999
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1
