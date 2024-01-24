@@ -1,0 +1,141 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8xtyq7g0m60w"]
+
+[ext_resource type="Script" path="res://Assets/Comment Jouer/commentjouer.gd" id="1_svt3q"]
+[ext_resource type="Texture2D" uid="uid://ce4jxdkpyiilc" path="res://Assets/Comment Jouer/Snapshot.PNG" id="2_0md8x"]
+[ext_resource type="Texture2D" uid="uid://nmqkcvscau13" path="res://Assets/Comment Jouer/icons8-arrow-50.png" id="3_1j557"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_16fdv"]
+font_size = 46
+
+[sub_resource type="LabelSettings" id="LabelSettings_qjerl"]
+font_size = 46
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mkow2"]
+load_path = "res://.godot/imported/coeur.png-5d1070f41f8e4b084814e8a86f85310c.ctex"
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_svt3q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 646.0
+color = Color(0.27451, 0.313726, 0.372549, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+offset_left = 384.0
+offset_top = 39.0
+offset_right = 768.0
+offset_bottom = 103.0
+size_flags_horizontal = 4
+text = "Comment jouer ?"
+label_settings = SubResource("LabelSettings_16fdv")
+
+[node name="Label2" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 99.0
+offset_top = 132.0
+offset_right = -97.0
+offset_bottom = 233.0
+grow_horizontal = 2
+text = "- Le but du jeu est d'enchainer des associations d'idée afin de gagner le plus de points possibles. Une idée est représentée par une image qu'il faut rattacher à sa précédente ou sa suivante.
+
+- Des malus comme des bonus peuvent apparaitres, alors prenez gardes !"
+horizontal_alignment = 1
+autowrap_mode = 3
+justification_flags = 227
+
+[node name="Label3" type="Label" parent="ColorRect"]
+offset_left = 168.0
+offset_top = 287.0
+offset_right = 369.0
+offset_bottom = 351.0
+size_flags_horizontal = 4
+text = "Les blocs"
+label_settings = SubResource("LabelSettings_qjerl")
+
+[node name="Face1" type="ColorRect" parent="ColorRect"]
+z_index = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.151042
+anchor_top = 0.620155
+anchor_right = 0.151042
+anchor_bottom = 0.620155
+offset_left = 50.0
+offset_top = -41.0
+offset_right = 90.0
+offset_bottom = -1.0
+scale = Vector2(2, 2)
+
+[node name="Sprite" type="Sprite2D" parent="ColorRect/Face1"]
+position = Vector2(20, 19)
+texture = SubResource("CompressedTexture2D_mkow2")
+
+[node name="Label" type="Label" parent="ColorRect/Face1"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+
+[node name="Label5" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 455.0
+offset_right = -644.0
+offset_bottom = 556.0
+grow_horizontal = 2
+text = "Un bloc comporte une image et une couleur, chaque face du bloc comporte une image choisi aléatoirement"
+horizontal_alignment = 1
+autowrap_mode = 3
+justification_flags = 227
+
+[node name="Label4" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.0387597
+anchor_bottom = -0.0387597
+offset_left = 720.0
+offset_top = 312.0
+offset_right = 990.0
+offset_bottom = 376.0
+size_flags_horizontal = 4
+text = "Les touches"
+label_settings = SubResource("LabelSettings_qjerl")
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ColorRect"]
+position = Vector2(856, 391)
+scale = Vector2(0.161111, 0.161111)
+texture = ExtResource("2_0md8x")
+
+[node name="Label6" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 616.0
+offset_top = 455.0
+offset_right = -52.0
+offset_bottom = 556.0
+grow_horizontal = 2
+text = "Une fois votre souris au dessus d'un bloc, vous pouvez changer sa face à l'aide des flèches de votre clavier.
+ Pour passer d'une face à une autre, vous devez revenir a la face principale"
+horizontal_alignment = 1
+autowrap_mode = 3
+justification_flags = 227
+
+[node name="Button" type="Button" parent="."]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 96.0
+offset_bottom = 96.0
+icon = ExtResource("3_1j557")
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
