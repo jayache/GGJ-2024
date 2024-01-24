@@ -7,8 +7,12 @@ var current_level := 1
 var score_per_level : Array[int] = []
 
 const LEVEL := preload("res://Assets/Niveau/Level.tscn")
+const END := preload("res://Assets/Cutscenes/end_screen.tscn")
 
 func next_level() -> Node:
+	if current_level > 15:
+		var end := END.instantiate()
+		end.get_node("Label").text = "Félicitation!\n\nScore: %d" % score_per_level.reduce(func(accum, number): return accum + number, 0)
 	var level := LEVEL.instantiate()
 	var settings : LevelSettings = null
 	match(current_level):

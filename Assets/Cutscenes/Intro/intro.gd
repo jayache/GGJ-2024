@@ -13,7 +13,7 @@ var texte := [
 	"Et nous accueillons notre invité de ce soir:",
 	"Le comédien DJAIPA DNOM!",
 	"(fadeout)",
-	"Bonjour, merci de vous êtes déplacé jusqu'ici.",
+	"Bonjour, merci de vous être déplacé jusqu'ici.",
 	"Merci à vous de m'accueillir!",
 	"Il paraît que les gens vous trouvent hilarant?",
 	"C'est ce qu'ils disent!",
@@ -48,7 +48,6 @@ func _on_timer_timeout() -> void:
 	await say_line(0, texte[2])
 	await say_line(1, texte[3])
 	await say_line(1, texte[4])
-	await say_line(1, texte[5])
 	var tween := create_tween()
 	tween.tween_property($Overlay, "color", Color(0, 0, 0, 1), 0.7)
 	await get_tree().create_timer(1.5).timeout
