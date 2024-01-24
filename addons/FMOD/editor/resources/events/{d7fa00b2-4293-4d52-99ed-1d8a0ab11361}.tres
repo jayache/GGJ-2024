@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://bpchyujnn6xbn"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX Game/Fireworks"
+guid = "{d7fa00b2-4293-4d52-99ed-1d8a0ab11361}"
+name = "Fireworks"

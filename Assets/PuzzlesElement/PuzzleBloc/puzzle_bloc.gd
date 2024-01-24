@@ -94,6 +94,7 @@ func _ready() -> void:
 func change_currently_showing(new_orientation: face_order):
 	currently_showing = new_orientation
 	emit_signal("bloc_changed")
+	FMODRuntime.play_one_shot_path("event:/SFX Game/Switch")
 
 func set_disabled(ndisabled: bool) -> void:
 	disabled = ndisabled

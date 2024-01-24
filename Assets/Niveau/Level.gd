@@ -21,6 +21,8 @@ var swap_power_selected := -1
 var level_in_progress := true
 var time_left : float = TIME_IN_SECONDS
 
+var instance: EventInstance
+
 ## TODO: ajouter des mots/catégories
 ## Aussi: Ajouter d'autres types de liaisons ?
 
@@ -37,6 +39,7 @@ var category_list : Array[PuzzleCategory] = [
 func _ready() -> void:
 		
 	FMODRuntime.play_one_shot_path("event:/Music/GameMusic")
+	instance = FMODRuntime.create_instance_path("event:/SFX Game/CrowdScore")
 	
 	var NUMBER_OF_BLOCS := settings.difficulty * 3
 	var BLOCS_PER_LINE := NUMBER_OF_BLOCS / 3
@@ -145,9 +148,13 @@ func put_hints() -> void:
 ## TODO: a faire quand les mécaniques seront plus fixées
 func calc_score() -> int:
 	var score := 0
+	
 	play_score_animation(true)
 	score = await self.level_finished
+	
+	print("yayaya")
 	return score
+	
 func get_all_categories_for_word(word: String) -> Array[PuzzleCategory]:
 	var ret : Array[PuzzleCategory] = []
 	for category in category_list:
@@ -206,6 +213,7 @@ func play_score_animation(skip_anim := false) -> void:
 		if word_share_category(a, b) or [a_color, b_color].has(Color.GREEN):
 			var cats := word_share_category_words(a, b)
 			var categories_word := ""
+			FMODRuntime.play_one_shot_path("event:/SFX Game/Fireworks")
 			for cat in cats:
 				categories_word += cat.category_name + "\n"
 			var sc := word_share_category_score(a, b)
@@ -235,6 +243,8 @@ func play_score_animation(skip_anim := false) -> void:
 				first_bloc.emit_failure()
 				second_bloc.emit_failure()
 				await get_tree().create_timer(wait_speed).timeout
+	instance.set_parameter_by_name("Score", total_score, false)
+	instance.start()
 	total_score += streak_score
 	emit_signal("score_animation_finished", total_score)
 	
@@ -253,6 +263,8 @@ func register_hide_bloc(index: int) -> void:
 func register_swap_bloc(index: int) -> void:
 	var blocs := get_node("Blocs").get_children()
 	var bloc : PuzzleBloc = blocs[index]
+	
+	
 	if bloc.hidden_by_power:
 		register_hide_bloc(index)
 	if bloc.swapped_with != -1:
@@ -262,6 +274,7 @@ func register_swap_bloc(index: int) -> void:
 		bloc.line.queue_free()
 		swap_power_left += 1
 		bloc.line = null
+		
 	elif swap_power_left <= 0:
 		return
 	elif swap_power_selected == -1:

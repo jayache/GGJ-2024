@@ -1,4 +1,4 @@
-[gd_resource type="ProjectCache" load_steps=16 format=3 uid="uid://ddnrxw2psuo5d"]
+[gd_resource type="ProjectCache" load_steps=19 format=3 uid="uid://ddnrxw2psuo5d"]
 
 [ext_resource type="BankAsset" uid="uid://cop4w7d4mwwuc" path="res://addons/FMOD/editor/resources/banks/{fcf57c1d-90c8-4561-8e67-14a8c8a19aff}.tres" id="1_n2i5w"]
 [ext_resource type="BankAsset" uid="uid://cugns3e3gic7d" path="res://addons/FMOD/editor/resources/banks/{64e85cc9-e1b3-0923-082e-9e5639529c67}.tres" id="2_6dw4o"]
@@ -14,7 +14,10 @@
 [ext_resource type="EventAsset" uid="uid://cyvw7se5nok0h" path="res://addons/FMOD/editor/resources/events/{b07b499f-c2f9-48b2-9dd2-84b66f84fd91}.tres" id="10_o6w8x"]
 [ext_resource type="EventAsset" uid="uid://c82mysx7obu5c" path="res://addons/FMOD/editor/resources/events/{c17fc770-470d-4cba-b2c8-2c98b62a1b02}.tres" id="11_78bu0"]
 [ext_resource type="EventAsset" uid="uid://b784wxa7cktfx" path="res://addons/FMOD/editor/resources/events/{6a2d0b8c-58be-498c-88b0-8ac484a4578a}.tres" id="11_hjixg"]
+[ext_resource type="EventAsset" uid="uid://fndxu6m4sttq" path="res://addons/FMOD/editor/resources/events/{3886e5f7-c5dd-41c7-8ae6-8d054293df02}.tres" id="11_r0vuc"]
+[ext_resource type="EventAsset" uid="uid://cyvyfj8owrk5h" path="res://addons/FMOD/editor/resources/events/{c0a899a6-1a07-4421-a5be-69e0002ca52a}.tres" id="11_s5txf"]
 [ext_resource type="EventAsset" uid="uid://btpk8g1e2fy1f" path="res://addons/FMOD/editor/resources/events/{54206345-40c4-463e-9eee-3c7fc3cff256}.tres" id="12_2vtws"]
+[ext_resource type="EventAsset" uid="uid://bpchyujnn6xbn" path="res://addons/FMOD/editor/resources/events/{d7fa00b2-4293-4d52-99ed-1d8a0ab11361}.tres" id="12_y7xrb"]
 
 [resource]
 banks = {
@@ -25,11 +28,14 @@ events = {
 "{013f8839-b2ca-427e-9c19-ff3fa822a59b}": ExtResource("10_jw51j"),
 "{1857b70f-39ce-44bb-9e82-366f197b1a9e}": ExtResource("9_nyupb"),
 "{2ad4f55c-ac06-437d-af47-59957ea065c2}": ExtResource("5_ceavp"),
+"{3886e5f7-c5dd-41c7-8ae6-8d054293df02}": ExtResource("11_r0vuc"),
 "{54206345-40c4-463e-9eee-3c7fc3cff256}": ExtResource("12_2vtws"),
 "{6216f3da-0216-4b75-8a54-2a0bf7070786}": ExtResource("8_ltpko"),
 "{6a2d0b8c-58be-498c-88b0-8ac484a4578a}": ExtResource("11_hjixg"),
 "{b07b499f-c2f9-48b2-9dd2-84b66f84fd91}": ExtResource("10_o6w8x"),
-"{c17fc770-470d-4cba-b2c8-2c98b62a1b02}": ExtResource("11_78bu0")
+"{c0a899a6-1a07-4421-a5be-69e0002ca52a}": ExtResource("11_s5txf"),
+"{c17fc770-470d-4cba-b2c8-2c98b62a1b02}": ExtResource("11_78bu0"),
+"{d7fa00b2-4293-4d52-99ed-1d8a0ab11361}": ExtResource("12_y7xrb")
 }
 busses = {
 "{142ee02b-bb99-4737-afde-908c7e5d4ff0}": ExtResource("6_rfnki"),
@@ -77,6 +83,24 @@ event_tree = [{
 "resource": null
 }, {
 "children": [{
+"children": [],
+"item_type": 1,
+"node_name": "CrowdScore",
+"path": "event:/SFX Game/CrowdScore",
+"resource": ExtResource("11_r0vuc")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "Fireworks",
+"path": "event:/SFX Game/Fireworks",
+"resource": ExtResource("12_y7xrb")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "Switch",
+"path": "event:/SFX Game/Switch",
+"resource": ExtResource("11_s5txf")
+}, {
 "children": [],
 "item_type": 1,
 "node_name": "Talking",

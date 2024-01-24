@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cyvyfj8owrk5h"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX Game/Switch"
+guid = "{c0a899a6-1a07-4421-a5be-69e0002ca52a}"
+name = "Switch"
