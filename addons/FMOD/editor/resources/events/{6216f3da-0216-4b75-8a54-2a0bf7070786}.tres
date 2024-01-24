@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://cqfqcyihqgyq8"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Music/GameMusic"
+guid = "{6216f3da-0216-4b75-8a54-2a0bf7070786}"
+name = "GameMusic"

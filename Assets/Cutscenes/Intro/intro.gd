@@ -4,6 +4,7 @@ extends Node2D
 @onready var label_presentateur: Label = $Sprite2D/LabelPresentateur
 @onready var label_comedien: Label = $Sprite2D/LabelComedien
 
+var event: EventInstance
 
 var texte := [
 	"Blablabla",
@@ -19,7 +20,11 @@ var texte := [
 	"Faites nous rire alors.",
 	"Ah."
 ]
-
+func _ready():
+	event = FMODRuntime.create_instance_path("event:/Music/IntroMusic")
+	event.start()
+	
+	
 func say_line(index: int, text: String) -> void:
 	var label : Label
 	
@@ -58,5 +63,6 @@ func _on_timer_timeout() -> void:
 	await say_line(2, texte[9])
 	await say_line(0, texte[10])
 	await say_line(2, texte[11])
+	event.stop(FMODStudioModule.FMOD_STUDIO_STOP_ALLOWFADEOUT)
 	get_tree().root.get_node("Intro").queue_free()
 	get_tree().root.add_child(LevelManager.next_level())

@@ -3,6 +3,6 @@
 [resource]
 min_distance = 1.0
 max_distance = 20.0
-path = "event:/music"
+path = "event:/Music/MenuMusic"
 guid = "{2ad4f55c-ac06-437d-af47-59957ea065c2}"
-name = "music"
+name = "MenuMusic"

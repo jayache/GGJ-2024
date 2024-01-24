@@ -1,0 +1,9 @@
+[gd_resource type="EventAsset" format=3 uid="uid://c82mysx7obu5c"]
+
+[resource]
+is_oneshot = true
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/UI/Hover"
+guid = "{c17fc770-470d-4cba-b2c8-2c98b62a1b02}"
+name = "Hover"

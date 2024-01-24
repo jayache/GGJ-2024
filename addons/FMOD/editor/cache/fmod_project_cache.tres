@@ -1,10 +1,20 @@
-[gd_resource type="ProjectCache" load_steps=6 format=3 uid="uid://ddnrxw2psuo5d"]
+[gd_resource type="ProjectCache" load_steps=16 format=3 uid="uid://ddnrxw2psuo5d"]
 
 [ext_resource type="BankAsset" uid="uid://cop4w7d4mwwuc" path="res://addons/FMOD/editor/resources/banks/{fcf57c1d-90c8-4561-8e67-14a8c8a19aff}.tres" id="1_n2i5w"]
 [ext_resource type="BankAsset" uid="uid://cugns3e3gic7d" path="res://addons/FMOD/editor/resources/banks/{64e85cc9-e1b3-0923-082e-9e5639529c67}.tres" id="2_6dw4o"]
 [ext_resource type="BusAsset" uid="uid://b4xiuja03w5ly" path="res://addons/FMOD/editor/resources/busses/{3c54403a-2287-45b3-a989-e6f01d060923}.tres" id="3_umdix"]
+[ext_resource type="BusAsset" uid="uid://bhoysf07oulan" path="res://addons/FMOD/editor/resources/busses/{4c6aaea4-da6a-4596-ad88-256d9d69ce46}.tres" id="4_1m2gb"]
 [ext_resource type="BusAsset" uid="uid://b2g70ud2re1dg" path="res://addons/FMOD/editor/resources/busses/{28e85613-4496-4534-8344-9c2e68795a59}.tres" id="4_f02a7"]
 [ext_resource type="EventAsset" uid="uid://crc067q1y58t3" path="res://addons/FMOD/editor/resources/events/{2ad4f55c-ac06-437d-af47-59957ea065c2}.tres" id="5_ceavp"]
+[ext_resource type="BusAsset" uid="uid://b41huqfc0kha6" path="res://addons/FMOD/editor/resources/busses/{142ee02b-bb99-4737-afde-908c7e5d4ff0}.tres" id="6_rfnki"]
+[ext_resource type="BusAsset" uid="uid://c8h36j3x4gwyd" path="res://addons/FMOD/editor/resources/busses/{c339d950-10ea-48a8-b989-2467ed7f229f}.tres" id="7_1ahlp"]
+[ext_resource type="EventAsset" uid="uid://cqfqcyihqgyq8" path="res://addons/FMOD/editor/resources/events/{6216f3da-0216-4b75-8a54-2a0bf7070786}.tres" id="8_ltpko"]
+[ext_resource type="EventAsset" uid="uid://b86bcoahqf8to" path="res://addons/FMOD/editor/resources/events/{1857b70f-39ce-44bb-9e82-366f197b1a9e}.tres" id="9_nyupb"]
+[ext_resource type="EventAsset" uid="uid://be1u8vlmax1cm" path="res://addons/FMOD/editor/resources/events/{013f8839-b2ca-427e-9c19-ff3fa822a59b}.tres" id="10_jw51j"]
+[ext_resource type="EventAsset" uid="uid://cyvw7se5nok0h" path="res://addons/FMOD/editor/resources/events/{b07b499f-c2f9-48b2-9dd2-84b66f84fd91}.tres" id="10_o6w8x"]
+[ext_resource type="EventAsset" uid="uid://c82mysx7obu5c" path="res://addons/FMOD/editor/resources/events/{c17fc770-470d-4cba-b2c8-2c98b62a1b02}.tres" id="11_78bu0"]
+[ext_resource type="EventAsset" uid="uid://b784wxa7cktfx" path="res://addons/FMOD/editor/resources/events/{6a2d0b8c-58be-498c-88b0-8ac484a4578a}.tres" id="11_hjixg"]
+[ext_resource type="EventAsset" uid="uid://btpk8g1e2fy1f" path="res://addons/FMOD/editor/resources/events/{54206345-40c4-463e-9eee-3c7fc3cff256}.tres" id="12_2vtws"]
 
 [resource]
 banks = {
@@ -12,11 +22,21 @@ banks = {
 "{fcf57c1d-90c8-4561-8e67-14a8c8a19aff}": ExtResource("1_n2i5w")
 }
 events = {
-"{2ad4f55c-ac06-437d-af47-59957ea065c2}": ExtResource("5_ceavp")
+"{013f8839-b2ca-427e-9c19-ff3fa822a59b}": ExtResource("10_jw51j"),
+"{1857b70f-39ce-44bb-9e82-366f197b1a9e}": ExtResource("9_nyupb"),
+"{2ad4f55c-ac06-437d-af47-59957ea065c2}": ExtResource("5_ceavp"),
+"{54206345-40c4-463e-9eee-3c7fc3cff256}": ExtResource("12_2vtws"),
+"{6216f3da-0216-4b75-8a54-2a0bf7070786}": ExtResource("8_ltpko"),
+"{6a2d0b8c-58be-498c-88b0-8ac484a4578a}": ExtResource("11_hjixg"),
+"{b07b499f-c2f9-48b2-9dd2-84b66f84fd91}": ExtResource("10_o6w8x"),
+"{c17fc770-470d-4cba-b2c8-2c98b62a1b02}": ExtResource("11_78bu0")
 }
 busses = {
+"{142ee02b-bb99-4737-afde-908c7e5d4ff0}": ExtResource("6_rfnki"),
 "{28e85613-4496-4534-8344-9c2e68795a59}": ExtResource("4_f02a7"),
-"{3c54403a-2287-45b3-a989-e6f01d060923}": ExtResource("3_umdix")
+"{3c54403a-2287-45b3-a989-e6f01d060923}": ExtResource("3_umdix"),
+"{4c6aaea4-da6a-4596-ad88-256d9d69ce46}": ExtResource("4_1m2gb"),
+"{c339d950-10ea-48a8-b989-2467ed7f229f}": ExtResource("7_1ahlp")
 }
 bank_tree = [{
 "children": [],
@@ -32,19 +52,97 @@ bank_tree = [{
 "resource": ExtResource("2_6dw4o")
 }]
 event_tree = [{
+"children": [{
 "children": [],
 "item_type": 1,
-"node_name": "music",
-"path": "event:/music",
+"node_name": "GameMusic",
+"path": "event:/Music/GameMusic",
+"resource": ExtResource("8_ltpko")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "IntroMusic",
+"path": "event:/Music/IntroMusic",
+"resource": ExtResource("9_nyupb")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "MenuMusic",
+"path": "event:/Music/MenuMusic",
 "resource": ExtResource("5_ceavp")
+}],
+"item_type": 7,
+"node_name": "Music",
+"path": "",
+"resource": null
+}, {
+"children": [{
+"children": [],
+"item_type": 1,
+"node_name": "Talking",
+"path": "event:/SFX Game/Talking",
+"resource": ExtResource("10_o6w8x")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "Talking Humoriste",
+"path": "event:/SFX Game/Talking Humoriste",
+"resource": ExtResource("11_hjixg")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "Talking Presentateur",
+"path": "event:/SFX Game/Talking Presentateur",
+"resource": ExtResource("12_2vtws")
+}],
+"item_type": 7,
+"node_name": "SFX Game",
+"path": "",
+"resource": null
+}, {
+"children": [{
+"children": [],
+"item_type": 1,
+"node_name": "Click",
+"path": "event:/UI/Click",
+"resource": ExtResource("10_jw51j")
+}, {
+"children": [],
+"item_type": 1,
+"node_name": "Hover",
+"path": "event:/UI/Hover",
+"resource": ExtResource("11_78bu0")
+}],
+"item_type": 7,
+"node_name": "UI",
+"path": "",
+"resource": null
 }]
 bus_tree = [{
 "children": [{
 "children": [],
 "item_type": 4,
+"node_name": "Music",
+"path": "bus:/Music",
+"resource": ExtResource("4_1m2gb")
+}, {
+"children": [],
+"item_type": 4,
 "node_name": "Reverb",
 "path": "bus:/Reverb",
 "resource": ExtResource("4_f02a7")
+}, {
+"children": [],
+"item_type": 4,
+"node_name": "SFX",
+"path": "bus:/SFX",
+"resource": ExtResource("6_rfnki")
+}, {
+"children": [],
+"item_type": 4,
+"node_name": "UI",
+"path": "bus:/UI",
+"resource": ExtResource("7_1ahlp")
 }],
 "item_type": 4,
 "node_name": "bus:",

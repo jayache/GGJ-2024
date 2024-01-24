@@ -35,6 +35,9 @@ var category_list : Array[PuzzleCategory] = [
 	]
 
 func _ready() -> void:
+		
+	FMODRuntime.play_one_shot_path("event:/Music/GameMusic")
+	
 	var NUMBER_OF_BLOCS := settings.difficulty * 3
 	var BLOCS_PER_LINE := NUMBER_OF_BLOCS / 3
 	var screen_size := get_viewport().get_visible_rect().size

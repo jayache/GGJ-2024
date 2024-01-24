@@ -1,0 +1,8 @@
+[gd_resource type="EventAsset" format=3 uid="uid://b86bcoahqf8to"]
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/Music/IntroMusic"
+guid = "{1857b70f-39ce-44bb-9e82-366f197b1a9e}"
+name = "IntroMusic"

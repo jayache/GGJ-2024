@@ -1,0 +1,8 @@
+[gd_resource type="EventAsset" format=3 uid="uid://b784wxa7cktfx"]
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX Game/Talking Humoriste"
+guid = "{6a2d0b8c-58be-498c-88b0-8ac484a4578a}"
+name = "Talking Humoriste"

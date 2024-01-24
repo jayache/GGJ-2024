@@ -1,0 +1,8 @@
+[gd_resource type="EventAsset" format=3 uid="uid://btpk8g1e2fy1f"]
+
+[resource]
+min_distance = 1.0
+max_distance = 20.0
+path = "event:/SFX Game/Talking Presentateur"
+guid = "{54206345-40c4-463e-9eee-3c7fc3cff256}"
+name = "Talking Presentateur"
