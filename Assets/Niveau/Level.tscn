@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqfgvp0ukrkg3"]
+[gd_scene load_steps=5 format=3 uid="uid://cqfgvp0ukrkg3"]
 
 [ext_resource type="Script" path="res://Assets/Niveau/Level.gd" id="1_irtxt"]
-[ext_resource type="Texture2D" uid="uid://vca3k0ui0euo" path="res://Assets/Sprites/Timebar/back.png" id="2_jng7y"]
-[ext_resource type="Texture2D" uid="uid://yuolpvjdboti" path="res://Assets/Sprites/Timebar/hover.png" id="3_bi6x8"]
+[ext_resource type="Texture2D" uid="uid://ycdcb7t3hiac" path="res://Assets/Sprites/Timebar/back.png" id="2_jng7y"]
+[ext_resource type="Script" path="res://Assets/SoundScripts/ScoreWindowSound.gd" id="2_spv0b"]
+[ext_resource type="Texture2D" uid="uid://b64jvobeopbtp" path="res://Assets/Sprites/Timebar/hover.png" id="3_bi6x8"]
 
 [node name="Niveau" type="Node2D"]
 script = ExtResource("1_irtxt")
@@ -18,6 +19,7 @@ color = Color(0.27451, 0.313726, 0.372549, 1)
 
 [node name="ScoreDialog" type="AcceptDialog" parent="."]
 initial_position = 2
+script = ExtResource("2_spv0b")
 
 [node name="ScoreLabel" type="Label" parent="."]
 visible = false
